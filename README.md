@@ -8,7 +8,7 @@ It showcases how to:
 * Build a local MCP server tool to trigger the GitHub workflow
 * Integrate with Claude Desktop to trigger deployments via chat 
 
-Live demo: [https://github-action-mcp-server.fly.dev/](https://github-action-mcp-server.fly.dev/)
+Live demo: [https://gthub-action-mcp-server.fly.dev/](https://gthub-action-mcp-server.fly.dev/)
 
 <img width="948" height="256" alt="image" src="https://github.com/user-attachments/assets/eaf81fd4-d019-4f13-9290-4a16d624029e" />
 
