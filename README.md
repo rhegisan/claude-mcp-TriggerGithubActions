@@ -1,6 +1,6 @@
 # Claude MCP - Trigger GitHub Actions
 
-This repository demonstrates a complete DevOps workflow using an MCP server combined with an AI assistant (e.g., Claude Desktop).
+This repository demonstrates a complete DevOps workflow using an MCP server combined with an AI assistant (Claude Desktop).
 It showcases how to:
 
 * Deploy a simple Flask website (John Cena’s retirement demo)
@@ -77,7 +77,7 @@ Live demo: [https://gthub-action-mcp-server.fly.dev/](https://gthub-action-mcp-s
 
 ---
 
-## 📦 Deploy Workflow
+## Deploy Workflow
 
 * GitHub Actions workflow is defined in `.github/workflows/deploy.yml`
 * Can be triggered manually via GitHub UI or via MCP server tool `trigger_deploy`
