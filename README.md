@@ -1,12 +1,13 @@
+
 # Claude MCP - Trigger GitHub Actions
 
-This repository demonstrates a complete DevOps workflow using an MCP server combined with an AI assistant (Claude Desktop).
+This repository demonstrates a complete DevOps workflow using an MCP server combined with an AI assistant (Claude Desktop).  
 It showcases how to:
 
 * Deploy a simple Flask website (John Cena’s retirement demo)
 * Configure a GitHub Actions workflow to deploy the site
 * Build a local MCP server tool to trigger the GitHub workflow
-* Integrate with Claude Desktop to trigger deployments via chat 
+* Integrate with Claude Desktop to trigger deployments via chat
 
 Live demo: [https://gthub-action-mcp-server.fly.dev/](https://gthub-action-mcp-server.fly.dev/)
 
@@ -22,6 +23,7 @@ Live demo: [https://gthub-action-mcp-server.fly.dev/](https://gthub-action-mcp-s
 * `.github/workflows/deploy.yml` – GitHub Actions workflow for deployment
 * `.env` – Environment variables for GitHub and Fly.io
 * `github_helper.py` – Python helper to trigger GitHub workflow
+* `test_trigger.py` – Standalone test to trigger workflow manually
 * `mcp_server.py` – MCP server exposing `trigger_deploy` tool
 
 ---
@@ -55,8 +57,10 @@ Live demo: [https://gthub-action-mcp-server.fly.dev/](https://gthub-action-mcp-s
 
 3. **Install dependencies**
 
-   * `pip install -r requirements.txt`
-   * `pip install python-dotenv requests`
+   ```bash
+   pip install -r requirements.txt
+   pip install python-dotenv requests
+   ```
 
 4. **Configure environment variables** in `.env`
 
@@ -69,39 +73,89 @@ Live demo: [https://gthub-action-mcp-server.fly.dev/](https://gthub-action-mcp-s
    FLY_API_TOKEN=your_fly_api_token
    ```
 
-5. **Run the MCP server locally**
+---
+
+## MCP Server Configuration
+
+Add the following MCP server configuration for Claude Desktop:
+
+```json
+{
+  "mcpServers": {
+    "deploy-tools": {
+      "command": "python",
+      "args": ["R:\github-actions-trigger-mcp\mcp_server.py"]
+    }
+  }
+}
+```
+
+* Adjust the path in `"args"` according to your MCP server location.
+
+---
+
+## Using the MCP Server
+
+1. Start the MCP server locally:
 
    ```bash
    python mcp_server.py
    ```
 
+2. Ask Claude Desktop:
+
+   ```
+   Trigger the deploy workflow
+   ```
+
+3. The MCP server triggers the GitHub Actions workflow automatically.
+
+---
+
+## Testing the Workflow Manually
+
+You can also test without Claude Desktop using `test_trigger.py`:
+
+```bash
+python test_trigger.py
+```
+
+This script triggers the workflow dispatch via GitHub API using your `.env` variables.  
+Check the **Actions** tab in your GitHub repository to verify the workflow run.
+
 ---
 
 ## Deploy Workflow
 
-* GitHub Actions workflow is defined in `.github/workflows/deploy.yml`
-* Can be triggered manually via GitHub UI or via MCP server tool `trigger_deploy`
+* Defined in `.github/workflows/deploy.yml`
+* Can be triggered:
+  * Manually via GitHub UI
+  * Via `test_trigger.py`
+  * Via MCP server tool `trigger_deploy`
 * Deploys the Flask app to Fly.io
 
 ---
 
 ## Using Claude Desktop
 
-1. Add MCP server configuration pointing to `mcp_server.py`
-2. Ask Claude Desktop:
-
-   ```
-   Trigger the deploy workflow
-   ```
-3. MCP server triggers the GitHub Actions workflow
+1. Configure MCP server (see above)
+2. Interact with Claude using natural language to trigger deployments.
+3. MCP server executes the workflow and deploys your app automatically.
 
 ---
 
-## Testing
+## Testing End-to-End
 
-* Push your code to GitHub (`git add .`, `git commit`, `git push`)
-* Verify the workflow run in the **Actions** tab
-* App should be live at your Fly.io URL
+1. Push your code to GitHub:
+
+   ```bash
+   git add .
+   git commit -m "Initial Flask site for John Cena retirement"
+   git push origin master
+   ```
+
+2. Verify the workflow run in the **Actions** tab
+3. App should be live at your Fly.io URL
 
 ---
 
@@ -109,5 +163,4 @@ Live demo: [https://gthub-action-mcp-server.fly.dev/](https://gthub-action-mcp-s
 
 * `.env` changes should **not** be committed
 * Ensure `workflow_dispatch` is defined in the workflow file for manual/API triggers
-
----
+* MCP server must be running before sending commands from Claude Desktop
