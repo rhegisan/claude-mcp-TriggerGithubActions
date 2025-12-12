@@ -11,7 +11,8 @@ It showcases how to:
 
 Live demo: [https://gthub-action-mcp-server.fly.dev/](https://gthub-action-mcp-server.fly.dev/)
 
-<img width="948" height="256" alt="image" src="https://github.com/user-attachments/assets/eaf81fd4-d019-4f13-9290-4a16d624029e" />
+<img width="917" height="468" alt="image" src="https://github.com/user-attachments/assets/d2199b58-d66a-4040-9718-d43e87595672" />
+
 
 ---
 
